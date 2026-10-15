@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<stdlib.h>
+int  * input(){
+    printf("Enter 5 numbers:\n");
+    int * arr=(int*)malloc(5*sizeof(int));
+    for(int i=0;i<5;i++){
+        scanf("%d",&arr[i]);
+    }
+    return arr;
+}
+
+bool canJump(int* nums, int numsSize) {
+    int max=0,max_jump=0;
+    if(*(nums+0)==0){
+        return false;
+    }
+    for(int i=0;i<numsSize;i++){
+        int max=0,max_jump=0;
+        max_jump = i + *(nums+i);
+        if(max<max_jump){
+            max+=max_jump;
+            if(max<=i){
+                return false;
+            }
+        }
+
+    }
+    return true;
+}
+int main(){
+    int * arr=input();
+    bool result = canJump(arr, 5);
+    if(result){
+        printf("true\n");
+    }
+    else{
+        printf("false\n");
+    }
+    free(arr);
+    return 0;
+}
